@@ -1,6 +1,6 @@
-package com.DoctorOffice.DoctorOffice.repository;
+package com.DoctorOffice.repository;
 
-import com.DoctorOffice.DoctorOffice.entity.Consultation;
+import com.DoctorOffice.entity.Consultation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.DoctorOffice.DoctorOffice.entity;
+package com.DoctorOffice.entity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,11 +21,11 @@ public class RendezVous {
 
     @ManyToOne
     @JoinColumn(name = "matPat_Ren", referencedColumnName = "matPat")
-    private Patient patient;
+    private Patient patient; // Many appointments belong to one patient
 
     @ManyToOne
     @JoinColumn(name = "medStat_Ren", referencedColumnName = "medStat")
-    private Medecin medecin;
+    private Medecin medecin; // Many appointments belong to one doctor
 
     public RendezVous(Long numRen, Date dateRen, String heure, Patient patient, Medecin medecin) {
         this.numRen = numRen;
@@ -74,6 +74,4 @@ public class RendezVous {
     public void setMedecin(Medecin medecin) {
         this.medecin = medecin;
     }
-
-    
 }

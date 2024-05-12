@@ -1,14 +1,6 @@
-package com.DoctorOffice.DoctorOffice.entity;
+package com.DoctorOffice.entity;
+
 import javax.persistence.*;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
-
 import java.util.Date;
 
 @Entity
@@ -31,11 +23,13 @@ public class Consultation {
 
     @ManyToOne
     @JoinColumn(name = "matPat_Dos", referencedColumnName = "matPat")
-    private Patient patient;
+    private Patient patient; // Many consultations belong to one patient
 
-     // Constructeur, getters et setters
-    public Consultation(Long numCons, String diagnostic, Date dateCons, String medicament, Patient patient) {
-        this.numCons = numCons;
+    // Constructors, getters, and setters
+    public Consultation() {
+    }
+
+    public Consultation(String diagnostic, Date dateCons, String medicament, Patient patient) {
         this.diagnostic = diagnostic;
         this.dateCons = dateCons;
         this.medicament = medicament;
@@ -81,5 +75,4 @@ public class Consultation {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
-    
 }

@@ -1,22 +1,14 @@
-package com.DoctorOffice.DoctorOffice.entity;
+package com.DoctorOffice.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "Medecin")
 public class Medecin {
-    
     @Id
-    @Column(name = "medStat")
     private String medStat;
-
-    @Column(name = "nom")
     private String nom;
-
-    @Column(name = "prenom")
     private String prenom;
-
-    @Column(name = "status")
     private String status;
 
     public Medecin(String medStat, String nom, String prenom, String status) {

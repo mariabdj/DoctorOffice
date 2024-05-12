@@ -1,4 +1,4 @@
-package com.DoctorOffice.DoctorOffice.entity;
+package com.DoctorOffice.entity;
 
 import javax.persistence.*;
 
@@ -20,7 +20,7 @@ public class SessionCompte {
 
     @ManyToOne
     @JoinColumn(name = "matPat_SesCom", referencedColumnName = "matPat")
-    private Patient patient;
+    private Patient patient; // Many sessions belong to one patient
 
     public SessionCompte(Long numSesCom, String utilisateur, String motDePasse, Patient patient) {
         this.numSesCom = numSesCom;

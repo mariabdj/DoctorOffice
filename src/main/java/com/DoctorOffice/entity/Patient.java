@@ -1,12 +1,6 @@
-package com.DoctorOffice.DoctorOffice.entity;
+package com.DoctorOffice.entity;
+
 import javax.persistence.*;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.SequenceGenerator;
-
 import java.util.Date;
 
 @Entity
@@ -16,7 +10,7 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matPat_seq")
     @SequenceGenerator(name = "matPat_seq", sequenceName = "matPat_seq", allocationSize = 1)
-    @Column(name = "matPat")
+    @Column(name = "matPat", length = 10) // Adjust length to match the database column
     private String matPat;
 
     @Column(name = "nom")
@@ -43,7 +37,6 @@ public class Patient {
     @Column(name = "birthdate")
     private Date birthdate;
 
-      // Constructeur, getters et setters
     public Patient(String matPat, String nom, String prenom, String email, String gender, String maladies,
             String adresse, String numtel, Date birthdate) {
         this.matPat = matPat;
@@ -128,5 +121,7 @@ public class Patient {
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
+
+    // Constructors, getters, and setters
     
 }

@@ -1,4 +1,4 @@
-package com.DoctorOffice.DoctorOffice.entity;
+package com.DoctorOffice.entity;
 
 import javax.persistence.*;
 
@@ -17,10 +17,10 @@ public class DossierMedicale {
 
     @ManyToOne
     @JoinColumn(name = "matPat_Dos", referencedColumnName = "matPat")
-    private Patient patient;
+    private Patient patient; // Many medical files belong to one patient
 
-    @OneToOne(mappedBy = "consultation")
-    private Consultation consultation;
+    @OneToOne(mappedBy = "patient")
+    private Consultation consultation; // A consultation is part of one medical file
 
     public DossierMedicale(Long numDos, String groupeSanguin, Patient patient, Consultation consultation) {
         this.numDos = numDos;
@@ -59,7 +59,5 @@ public class DossierMedicale {
 
     public void setConsultation(Consultation consultation) {
         this.consultation = consultation;
-    }
-
-    
+    }    
 }
