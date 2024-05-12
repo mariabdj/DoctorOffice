@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take an Appointement</title>
+    <link rel="stylesheet" href="TakeAppoinetemnt.css">
+  </head>
+  <body>
+    <div id="affiche">
+      <div class="registration-form">
+        <header>
+          <h1>New Appointement</h1>
+          <p>Fill in all informations</p>
+        </header>
+        <form>
+          <div class="input-section email-section">
+            <input class="email" type="DATE" placeholder="ENTER A DATE" autocomplete="off">
+            <div class="animated-button"><span class="icon-paper-plane"><i class="fa fa-envelope-o"></i></span><span class="next-button email"><i class="fa fa-arrow-up"></i></span></div>
+          </div>
+          <div class="input-section password-section folded">
+            <input class="password" type="time" placeholder="ENTER AN HOUR">
+            <div class="animated-button"><span class="icon-lock"><i class="fa fa-lock"></i></span><span class="next-button password"><i class="fa fa-arrow-up"></i></span></div>
+          </div>
+          <div class="input-section repeat-password-section folded">
+            <input class="repeat-password" type="text" placeholder="CHOOSE YOUR DOCTOR">
+            <div class="animated-button"><span class="icon-repeat-lock"><i class="fa fa-lock"></i></span><span class="next-button repeat-password"><i class="fa fa-paper-plane"></i></span></div>
+          </div>
+          <div class="success"> 
+            <p>APPOINTEMENT TAKEN</p>
+          </div>
+        </form>
+       </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="TakeAppointement.js"></script>
+  </body>
+</html>

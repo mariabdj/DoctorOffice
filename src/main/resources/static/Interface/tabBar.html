@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <link rel="stylesheet" href="tabBar.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="sc-bottom-bar">
+    <a class="sc-menu-item" onclick="loadContent('MedicalFile.html')">
+      <i class="fas fa-list"></i>
+    </a>
+  <a class="sc-menu-item sc-current" onclick="loadContentT('TakeAppointement.html')">
+    <i class="fas fa-plus"></i>
+  </a>
+    <a class="sc-nav-indicator">
+    </a>
+    <a class="sc-menu-item" id="back" onclick="loadContentC('Calendar.html')">
+      <i class="fas fa-calendar-alt"></i>
+    </a>
+</div>
+<!-- partial -->
+
+<div id="contentContainer" class="affiche">
+  <!-- Content will be loaded here -->
+</div>
+
+<script src="tabBar.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function loadContent(page) {
+    fetch(page)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('contentContainer').innerHTML = data;
+      });
+  }
+  function loadContentT(page) {
+  fetch(page)
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('contentContainer').innerHTML = data;
+      // Dynamically add the script after loading the HTML content
+      const script = document.createElement('script');
+      script.src = 'TakeAppointement.js';
+      document.body.appendChild(script);
+    });
+}
+
+  function loadContentC(page) {
+    document.getElementById('contentContainer').innerHTML = "<div style='text-align: center; font-size: 24px;'>Click <a href='" + page + "'>here</a> to go to your calendar.</div>";
+  }
+</script>
+</body>
+</html>
