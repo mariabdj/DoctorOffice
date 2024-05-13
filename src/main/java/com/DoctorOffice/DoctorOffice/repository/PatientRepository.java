@@ -7,5 +7,5 @@ import com.DoctorOffice.DoctorOffice.entity.Patient;
 
 
 @Repository
-public interface PatientRepository extends JpaRepository<Patient, String> {
+public interface PatientRepository extends JpaRepository<Patient, Long> {
 }
