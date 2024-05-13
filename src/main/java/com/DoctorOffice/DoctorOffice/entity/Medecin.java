@@ -1,15 +1,23 @@
-package com.DoctorOffice.entity;
+package com.DoctorOffice.DoctorOffice.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.*;
+
 
 @Entity
+@Table(name = "Medecin")
 public class Medecin {
     @Id
+    @Column(name = "medStat")
     private String medStat;
+
+    @Column(name = "nom")
     private String nom;
+
+    @Column(name = "prenom")
     private String prenom;
-    private String status;
+
+    @Column(name = "status")
+    private String status; // Add status field
 
     public Medecin(String medStat, String nom, String prenom, String status) {
         this.medStat = medStat;
@@ -50,6 +58,8 @@ public class Medecin {
         this.status = status;
     }
 
-    
+    // Constructors, getters, and setters
 
+
+    
 }

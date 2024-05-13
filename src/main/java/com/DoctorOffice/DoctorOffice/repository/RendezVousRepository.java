@@ -1,8 +1,10 @@
-package com.DoctorOffice.repository;
+package com.DoctorOffice.DoctorOffice.repository;
 
-import com.DoctorOffice.entity.RendezVous;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.DoctorOffice.DoctorOffice.entity.RendezVous;
+
 
 @Repository
 public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
