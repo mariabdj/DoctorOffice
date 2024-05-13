@@ -19,7 +19,8 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matPat_seq")
     @SequenceGenerator(name = "matPat_seq", sequenceName = "matPat_seq", allocationSize = 1)
     @Column(name = "matPat", length = 10) // Adjust length to match the database column
-    private String matPat;
+    private Long matPat;
+
 
     @Column(name = "nom")
     private String nom;
@@ -50,9 +51,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String matPat, String nom, String prenom, String email, String gender, String maladies,
-            String adresse, String numtel, Date birthdate) {
-        this.matPat = matPat;
+    public Patient(String nom, String prenom, String email, String gender, String maladies, String adresse, String numtel, Date birthdate) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -62,12 +61,13 @@ public class Patient {
         this.numtel = numtel;
         this.birthdate = birthdate;
     }
+    
 
-    public String getMatPat() {
+    public Long getMatPat() {
         return matPat;
     }
 
-    public void setMatPat(String matPat) {
+    public void setMatPat(Long matPat) {
         this.matPat = matPat;
     }
 

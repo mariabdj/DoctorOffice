@@ -33,11 +33,10 @@ public class SessionCompte {
     public SessionCompte() {
     }
 
-    public SessionCompte(Long numSesCom, String utilisateur, String motDePasse, Patient patient) {
-        this.numSesCom = numSesCom;
+    
+    public SessionCompte(String utilisateur, String motDePasse) {
         this.utilisateur = utilisateur;
         this.motDePasse = motDePasse;
-        this.patient = patient;
     }
 
     public Long getNumSesCom() {
