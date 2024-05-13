@@ -1,12 +1,13 @@
-package com.DoctorOffice.entity;
+package com.DoctorOffice.DoctorOffice.entity;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "RendezVous")
 public class RendezVous {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "numRen_seq")
     @SequenceGenerator(name = "numRen_seq", sequenceName = "numRen_seq", allocationSize = 1)
@@ -26,6 +27,9 @@ public class RendezVous {
     @ManyToOne
     @JoinColumn(name = "medStat_Ren", referencedColumnName = "medStat")
     private Medecin medecin; // Many appointments belong to one doctor
+
+    public RendezVous() {
+    }
 
     public RendezVous(Long numRen, Date dateRen, String heure, Patient patient, Medecin medecin) {
         this.numRen = numRen;
@@ -74,4 +78,7 @@ public class RendezVous {
     public void setMedecin(Medecin medecin) {
         this.medecin = medecin;
     }
+
+    
+    
 }

@@ -1,7 +1,15 @@
-package com.DoctorOffice.entity;
+package com.DoctorOffice.DoctorOffice.entity;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "Patient")
@@ -36,6 +44,11 @@ public class Patient {
 
     @Column(name = "birthdate")
     private Date birthdate;
+
+    
+
+    public Patient() {
+    }
 
     public Patient(String matPat, String nom, String prenom, String email, String gender, String maladies,
             String adresse, String numtel, Date birthdate) {
@@ -122,6 +135,5 @@ public class Patient {
         this.birthdate = birthdate;
     }
 
-    // Constructors, getters, and setters
     
 }

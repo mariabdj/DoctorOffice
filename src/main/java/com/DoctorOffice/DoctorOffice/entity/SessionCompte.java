@@ -1,11 +1,18 @@
-package com.DoctorOffice.entity;
+package com.DoctorOffice.DoctorOffice.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "SessionCompte")
 public class SessionCompte {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "numSesCom_seq")
     @SequenceGenerator(name = "numSesCom_seq", sequenceName = "numSesCom_seq", allocationSize = 1)
@@ -21,6 +28,10 @@ public class SessionCompte {
     @ManyToOne
     @JoinColumn(name = "matPat_SesCom", referencedColumnName = "matPat")
     private Patient patient; // Many sessions belong to one patient
+
+
+    public SessionCompte() {
+    }
 
     public SessionCompte(Long numSesCom, String utilisateur, String motDePasse, Patient patient) {
         this.numSesCom = numSesCom;
@@ -61,4 +72,5 @@ public class SessionCompte {
         this.patient = patient;
     }
 
+    
 }
