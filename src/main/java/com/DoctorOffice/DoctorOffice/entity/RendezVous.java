@@ -2,7 +2,15 @@ package com.DoctorOffice.DoctorOffice.entity;
 
 import java.util.Date;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 
 @Entity
@@ -31,8 +39,7 @@ public class RendezVous {
     public RendezVous() {
     }
 
-    public RendezVous(Long numRen, Date dateRen, String heure, Patient patient, Medecin medecin) {
-        this.numRen = numRen;
+    public RendezVous(Date dateRen, String heure, Patient patient, Medecin medecin) {
         this.dateRen = dateRen;
         this.heure = heure;
         this.patient = patient;

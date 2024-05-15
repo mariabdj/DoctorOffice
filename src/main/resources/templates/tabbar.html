@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <link rel="stylesheet" href="../static/tabBar.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Add appropriate links to each tab -->
+<div class="sc-bottom-bar">
+  <a class="sc-menu-item" href="/redirectMedicalFile">
+    <i class="fas fa-list"></i>
+  </a>
+  <a class="sc-menu-item sc-current" href="/redirectTakeAppointment"> 
+    <i class="fas fa-plus"></i>
+  </a>
+  <a class="sc-nav-indicator"></a>
+  <a class="sc-menu-item" href="/redirectCalendar">
+    <i class="fas fa-calendar-alt"></i>
+  </a>
+</div>
+<div th:if="${successMessage}" class="success"> 
+  <p th:text="${successMessage}"></p>
+</div>
+<div th:if="${errorMessage}" class="error"> 
+  <p th:text="${errorMessage}"></p>
+</div>
+
+
+<!-- partial -->
+
+<div id="contentContainer" class="affiche">
+  <!-- Content will be loaded here -->
+</div>
+
+<script src="../static/tabBar.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+ $(document).ready(function(){
+    $('.sc-current').click(function(e){
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            type: 'GET',
+            async: true, // Set asynchronous request
+            success: function(data) {
+                $('#contentContainer').html(data); // Load response into content container
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+</script>
+
+</body>
+</html>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.DoctorOffice.DoctorOffice.entity.SessionCompte;
+import com.DoctorOffice.DoctorOffice.entity.Patient; // Import Patient entity
 import com.DoctorOffice.DoctorOffice.repository.SessionCompteRepository;
 
 @Service
@@ -32,7 +33,13 @@ public class SessionCompteService {
         }
         return false; // Either username doesn't exist or password doesn't match
     }
-
     
-
+    // Method to find a patient by username and password
+    public Patient findPatientByUsernameAndPassword(String username, String password) {
+        SessionCompte sessionCompte = sessionCompteRepository.findByUtilisateur(username);
+        if (sessionCompte != null && sessionCompte.getMotDePasse().equals(password)) {
+            return sessionCompte.getPatient();
+        }
+        return null; // No patient found for the given username and password
+    }
 }
