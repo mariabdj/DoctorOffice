@@ -26,6 +26,13 @@ public class Medecin {
         this.status = status;
     }
 
+    
+
+    public Medecin() {
+    }
+
+
+
     public String getMedStat() {
         return medStat;
     }

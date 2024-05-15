@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take an Appointment</title>
+    <link rel="stylesheet" href="../static/TakeAppoinetemnt.css">
+</head>
+<body>
+<div id="affiche">
+    <div class="registration-form">
+        <header>
+            <h1>New Appointment</h1>
+            <p>Fill in all information</p>
+        </header>
+        <form action="/take" method="post">
+            <div class="input-section email-section">
+                <input class="email" type="date" placeholder="ENTER A DATE" autocomplete="off"  name="date">
+                <div class="animated-button"><span class="icon-paper-plane"><i class="fa fa-envelope-o"></i></span><span class="next-button email"><i class="fa fa-arrow-up"></i></span></div>
+            </div>
+            <div class="input-section password-section folded">
+                <input class="password" type="time" placeholder="ENTER AN HOUR"  name="hour">
+                <div class="animated-button"><span class="icon-lock"><i class="fa fa-lock"></i></span><span class="next-button password"><i class="fa fa-arrow-up"></i></span></div>
+            </div>
+            <div class="input-section repeat-password-section folded">
+                <input class="repeat-password" type="text" placeholder="CHOOSE YOUR DOCTOR" name="doctor">
+                <!-- Note: Changed class name to 'submitButton' for easier identification -->
+                <div type="submit" th:onclick="'document.querySelector(\'form\').submit();'" class="animated-button"><span class="icon-repeat-lock"><i class="fa fa-lock"></i></span><span type="submit" class="next-button repeat-password submitButton"><i type="submit" class="fa fa-paper-plane"></i></span></div>
+            </div>
+            <div class="success">
+                <p>APPOINTMENT TAKEN</p>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../static/TakeAppointement.js"></script>
+</body>
+</html>
