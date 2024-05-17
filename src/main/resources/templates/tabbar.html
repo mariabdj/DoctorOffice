@@ -39,8 +39,8 @@
 <script src="../static/tabBar.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
- $(document).ready(function(){
-    $('.sc-current').click(function(e){
+$(document).ready(function() {
+    $('.sc-menu-item').click(function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
@@ -56,6 +56,8 @@
         });
     });
 });
+
+
 
 </script>
 

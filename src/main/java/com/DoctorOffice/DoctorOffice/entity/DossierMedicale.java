@@ -1,11 +1,19 @@
 package com.DoctorOffice.DoctorOffice.entity;
 
-import java.util.List;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "DossierMedicale")
 public class DossierMedicale {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "numDos_seq")
     @SequenceGenerator(name = "numDos_seq", sequenceName = "numDos_seq", allocationSize = 1)
@@ -19,14 +27,10 @@ public class DossierMedicale {
     @JoinColumn(name = "matPat_Dos", referencedColumnName = "matPat")
     private Patient patient; // Many medical files belong to one patient
 
-    @OneToMany(mappedBy = "dossierMedicale")
-    private List<Consultation> consultations; // A medical file can have multiple consultations
-
-    public DossierMedicale(Long numDos, String groupeSanguin, Patient patient, List<Consultation> consultations) {
+    public DossierMedicale(Long numDos, String groupeSanguin, Patient patient) {
         this.numDos = numDos;
         this.groupeSanguin = groupeSanguin;
         this.patient = patient;
-        this.consultations = consultations;
     }
 
     public DossierMedicale() {
@@ -56,13 +60,4 @@ public class DossierMedicale {
         this.patient = patient;
     }
 
-    public List<Consultation> getConsultations() {
-        return consultations;
-    }
-
-    public void setConsultations(List<Consultation> consultations) {
-        this.consultations = consultations;
-    }
-
 }
-

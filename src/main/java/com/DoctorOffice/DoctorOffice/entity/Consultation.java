@@ -2,7 +2,15 @@ package com.DoctorOffice.DoctorOffice.entity;
 
 import java.util.Date;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Consultation")
@@ -26,17 +34,13 @@ public class Consultation {
     @JoinColumn(name = "matPat_Dos", referencedColumnName = "matPat")
     private Patient patient; // Many consultations belong to one patient
 
-    @ManyToOne
-    @JoinColumn(name = "numDos_Dos", referencedColumnName = "numDos")
-    private DossierMedicale dossierMedicale; // Each consultation belongs to a dossierMedicale
 
-    public Consultation(Long numCons, String diagnostic, Date dateCons, String medicament, Patient patient, DossierMedicale dossierMedicale) {
+    public Consultation(Long numCons, String diagnostic, Date dateCons, String medicament, Patient patient) {
         this.numCons = numCons;
         this.diagnostic = diagnostic;
         this.dateCons = dateCons;
         this.medicament = medicament;
         this.patient = patient;
-        this.dossierMedicale = dossierMedicale;
     }
 
     public Consultation() {
@@ -80,13 +84,5 @@ public class Consultation {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
-    }
-
-    public DossierMedicale getDossierMedicale() {
-        return dossierMedicale;
-    }
-
-    public void setDossierMedicale(DossierMedicale dossierMedicale) {
-        this.dossierMedicale = dossierMedicale;
     }
 }
