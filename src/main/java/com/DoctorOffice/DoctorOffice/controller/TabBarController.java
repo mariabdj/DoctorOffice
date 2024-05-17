@@ -10,7 +10,7 @@ public class TabBarController {
     @GetMapping("/template/tabbar.html")
     public String redirect(Model model) {
         // You can load data or do any processing here if needed
-        return "tabbar"; // This will load TakeAppointment.html into tabbar.html
+        return "tabbar"; 
     }
 
     @GetMapping("/redirectTakeAppointment")
@@ -18,4 +18,6 @@ public class TabBarController {
         // You can load data or do any processing here if needed
         return "TakeAppointement"; // This will load TakeAppointment.html into tabbar.html
     }
+
+
 }

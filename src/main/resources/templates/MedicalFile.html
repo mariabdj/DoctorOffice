@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,30 +11,22 @@
     <div class="info">
       <div class="name">
         <h1 class="infoPat">Patient :</h1>
-      <p class="NP">Nom, prénom</p>
+        <p class="NP" th:text="${fullName}">Nom, prénom</p>
       </div>
       <div class="blood">
         <h2 class="infoPat">Blood Type :</h2>
-        <p class="GS">GS</p>
+        <!-- Check if dossier is null -->
+  <!-- Display blood type if dossier is not null -->
+  <p class="GS" th:text="${bloodType}">GS</p>
+
       </div>
     </div>
     <h2 class="consu">Consultations :</h2>
     <div class="cardContainer">
-      <div class="card">
-          <h2 class="header">Consu</h2>
-          <p class="content">Information</p>
-        </div>
-        <div class="card">
-          <h2 class="header">Consu</h2>
-          <p class="content">Information</p>
-        </div>
-        <div class="card">
-          <h2 class="header">Consu</h2>
-          <p class="content">Information</p>
-        </div>
-        <div class="card">
-          <h2 class="header">Consu</h2>
-          <p class="content">Information</p>
+      <div class="card" th:each="consultation : ${consultations}">
+        <h2 class="header" th:text="${#dates.format(consultation.dateCons, 'dd/MM/yyyy')}">Date Consu</h2>
+        <p>Diagnosis: <span th:text="${consultation.diagnostic}">No diagnosis available</span></p>
+          <p class="content" th:text="${consultation.medicament}">medoc</p>
         </div>
       </div>
   </div>
