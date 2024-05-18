@@ -18,7 +18,7 @@
     <i class="fas fa-plus"></i>
   </a>
   <a class="sc-nav-indicator"></a>
-  <a class="sc-menu-item" href="/redirectCalendar">
+  <a class="sc-menu-item" id="calendarLink" href="#">
     <i class="fas fa-calendar-alt"></i>
   </a>
 </div>
@@ -28,7 +28,6 @@
 <div th:if="${errorMessage}" class="error"> 
   <p th:text="${errorMessage}"></p>
 </div>
-
 
 <!-- partial -->
 
@@ -40,7 +39,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('.sc-menu-item').click(function(e) {
+    $('.sc-menu-item').not('#calendarLink').click(function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
         $.ajax({
@@ -55,9 +54,16 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#calendarLink').click(function(e) {
+        e.preventDefault();
+        loadContentC('/redirectCalendar');
+    });
 });
 
-
+function loadContentC(page) {
+    document.getElementById('contentContainer').innerHTML = "<div style='text-align: center; font-size: 24px;'>Click <a href='" + page + "'>here</a> to go to your calendar.</div>";
+}
 
 </script>
 

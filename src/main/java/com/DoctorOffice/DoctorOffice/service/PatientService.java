@@ -36,5 +36,9 @@ public class PatientService {
         sessionCompteRepository.save(sessionCompte);
     }
 
+    public Patient getPatientById(Long id) {
+        return patientRepository.findById(id).orElse(null);
+    }
+
 
 }

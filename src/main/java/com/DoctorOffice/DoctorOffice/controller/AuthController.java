@@ -16,9 +16,6 @@ import com.DoctorOffice.DoctorOffice.service.PatientService;
 import com.DoctorOffice.DoctorOffice.service.SessionCompteService;
 
 
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller

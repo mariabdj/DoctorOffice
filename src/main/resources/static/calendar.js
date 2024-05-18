@@ -5,274 +5,194 @@ new Vue({
         dateContext: moment(),
         selectedDate: moment(),
         days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        appointmentsByPatientAndDate: {},
+        patientId: '' // Don't set patientId here
     },
     computed: {
-        year: function() {
+        year() {
             return this.dateContext.format("Y");
         },
-
-        month: function() {
+        month() {
             return this.dateContext.format("MMMM");
         },
-
-        daysInMonth: function() {
+        daysInMonth() {
             return this.dateContext.daysInMonth();
         },
-
-        currentDate: function() {
+        currentDate() {
             return this.dateContext.get("date");
         },
-
-        firstDayOfMonth: function() {
-            let firstDay = moment(this.dateContext).subtract(this.currentDate,"days");
+        firstDayOfMonth() {
+            let firstDay = moment(this.dateContext).startOf('month');
             return firstDay.weekday();
         },
-
-        previousMonth: function() {
+        previousMonth() {
             return moment(this.dateContext).subtract(1, "month");
         },
-        previousMonthAsString: function() {
+        previousMonthAsString() {
             return this.previousMonth.format("MMMM");
         },
-        nextMonth: function() {
+        nextMonth() {
             return moment(this.dateContext).add(1, "month");
         },
-        nextMonthAsString: function() {
+        nextMonthAsString() {
             return this.nextMonth.format("MMMM");
         },
-
-        daysInPreviousMonth: function() {
+        daysInPreviousMonth() {
             return this.previousMonth.daysInMonth();
         },
-        daysFromPreviousMonth: function() {
+        daysFromPreviousMonth() {
             let daysList = [];
-            let count = this.daysInPreviousMonth - this.firstDayOfMonth;
-            while (count < this.daysInPreviousMonth) {
-                count++;
-                daysList[count] = count;
+            let count = this.daysInPreviousMonth - this.firstDayOfMonth + 1;
+            for (let i = count; i <= this.daysInPreviousMonth; i++) {
+                daysList.push(i);
             }
-
-            return daysList.filter(function() {
-                return true;
-            });
+            return daysList;
         },
-
-        dateList: function() {
-            let $this = this;
-
+        dateList() {
             let dateList = [];
+            let daysFromPreviousMonth = this.daysFromPreviousMonth;
+            let firstDayOfMonth = this.firstDayOfMonth;
+            let daysInMonth = this.daysInMonth;
 
-            let previousMonth = this.previousMonth;
-            let nextMonth = this.nextMonth;
-
-            //dates for display
-            let formattedCurrentMonth = this.dateContext.format("MM");
-            let formattedCurrentYear = this.year;
-            let formattedPreviousMonth = previousMonth.format("MM");
-            let formattedPreviousYear = previousMonth.format("Y");
-            let formattedNextMonth = nextMonth.format("MM");
-            let formattedNextYear = nextMonth.format("Y");
-
-            //counters
-            let countDayInCurrentMonth = 0;
-            let countDayInPreviousMonth = 0;
-
-            //filling in dates from the previous month
-            this.daysFromPreviousMonth.forEach(function(dayFromPreviousMonth) {
-                countDayInCurrentMonth++;
-                countDayInPreviousMonth++;
-
-                let formattedDay = $this.formattingDay(dayFromPreviousMonth);
-                let previousMonth =
-                    $this.daysFromPreviousMonth.length ===
-                    countDayInPreviousMonth
-                        ? $this.previousMonthAsString
-                        : false;
-                let previousYear =
-                    formattedCurrentYear !== formattedPreviousYear &&
-                    $this.daysFromPreviousMonth.length ===
-                        countDayInPreviousMonth
-                        ? formattedPreviousYear
-                        : false;
-                let additional = {
-                    month: previousMonth,
-                    year: previousYear
-                };
-
-                if (!previousMonth && !previousYear) {
-                    additional = false;
-                }
-
-                dateList[countDayInCurrentMonth] = {
-                    key: countDayInCurrentMonth,
-                    dayNumber: formattedDay,
-                    date:
-                        formattedDay +
-                        "." +
-                        formattedPreviousMonth +
-                        "." +
-                        formattedPreviousYear,
+            daysFromPreviousMonth.forEach((day, index) => {
+                dateList.push({
+                    key: index,
+                    dayNumber: day,
+                    date: moment(this.previousMonth).date(day).format('YYYY-MM-DD'),
                     blank: true,
                     today: false,
-                    additional: additional,
-                    weekDay: false,
-                    moment: moment(
-                        formattedPreviousYear +
-                            formattedPreviousMonth +
-                            formattedDay
-                    )
-                };
+                    additional: {
+                        month: this.previousMonthAsString,
+                        year: this.previousMonth.format('YYYY')
+                    },
+                    weekDay: this.getWeekDay(day),
+                    moment: moment(this.previousMonth).date(day)
+                });
             });
 
-            //filling in dates from the current month
-            while (countDayInCurrentMonth < this.firstDayOfMonth + this.daysInMonth) {
-                countDayInCurrentMonth++;
-
-                let day = countDayInCurrentMonth - countDayInPreviousMonth;
-                let weekDay = this.getWeekDay(countDayInCurrentMonth);
-                let formattedDay = this.formattingDay(day);
-
-                dateList[countDayInCurrentMonth] = {
-                    key: countDayInCurrentMonth,
-                    dayNumber: formattedDay,
-                    date:
-                        formattedDay +
-                        "." +
-                        formattedCurrentMonth +
-                        "." +
-                        formattedCurrentYear,
+            for (let i = 1; i <= daysInMonth; i++) {
+                dateList.push({
+                    key: firstDayOfMonth + i - 1,
+                    dayNumber: i,
+                    date: moment(this.dateContext).date(i).format('YYYY-MM-DD'),
                     blank: false,
-                    today:
-                        formattedDay === this.initialDate &&
-                        this.todayInCurrentMonthAndYear,
+                    today: this.today.isSame(moment(this.dateContext).date(i), 'day'),
                     additional: false,
-                    weekDay: weekDay,
-                    moment: moment(
-                        formattedCurrentYear +
-                            formattedCurrentMonth +
-                            formattedDay
-                    )
-                };
+                    weekDay: this.getWeekDay(firstDayOfMonth + i - 1),
+                    moment: moment(this.dateContext).date(i)
+                });
             }
 
-            let daysInNextMonth = 7 - (countDayInCurrentMonth % 7);
-            let countDayInCurrentMonthSaved = countDayInCurrentMonth;
-            let day = 0;
-
-            //filling in dates from the next month
-            if (daysInNextMonth < 7) {
-                while (
-                    countDayInCurrentMonth <
-                    countDayInCurrentMonthSaved + daysInNextMonth
-                ) {
-                    countDayInCurrentMonth++;
-                    day++;
-
-                    let formattedDay = this.formattingDay(day);
-                    let nextMonth = day === 1 ? this.nextMonthAsString : false;
-                    let nextYear =
-                        formattedCurrentYear !== formattedNextYear && day === 1
-                            ? formattedNextYear
-                            : false;
-                    let additional = {
-                        month: nextMonth,
-                        year: nextYear
-                    };
-
-                    if (!nextMonth && !nextYear) {
-                        additional = false;
-                    }
-
-                    dateList[countDayInCurrentMonth] = {
-                        key: countDayInCurrentMonth,
-                        dayNumber: formattedDay,
-                        date:
-                            formattedDay +
-                            "." +
-                            formattedNextMonth +
-                            "." +
-                            formattedNextYear,
-                        blank: true,
-                        today: false,
-                        additional: additional,
-                        weekDay: false,
-                        moment: moment(
-                            formattedNextYear +
-                                formattedNextMonth +
-                                formattedDay
-                        )
-                    };
-                }
+            let remainingDays = (7 - (dateList.length % 7)) % 7;
+            for (let i = 1; i <= remainingDays; i++) {
+                dateList.push({
+                    key: dateList.length,
+                    dayNumber: i,
+                    date: moment(this.nextMonth).date(i).format('YYYY-MM-DD'),
+                    blank: true,
+                    today: false,
+                    additional: {
+                        month: this.nextMonthAsString,
+                        year: this.nextMonth.format('YYYY')
+                    },
+                    weekDay: this.getWeekDay(dateList.length),
+                    moment: moment(this.nextMonth).date(i)
+                });
             }
 
-            return dateList.filter(function() {
-                return true;
-            });
+            return dateList;
         },
-
-        initialDate: function() {
-            return this.formattingDay(this.today.get("date"));
-        },
-        initialMonth: function() {
-            return this.today.format("MMMM");
-        },
-        initialYear: function() {
-            return this.today.format("Y");
-        },
-        todayInCurrentMonthAndYear: function() {
-            return (
-                this.month === this.initialMonth &&
-                this.year === this.initialYear
-            );
-        },
-        selectedDayAndMonth: function() {
+        selectedDayAndMonth() {
             let dayAndMonth = this.selectedDate.format("D MMMM");
             dayAndMonth = dayAndMonth.split(" ");
-            dayAndMonth = {
+            return {
                 day: dayAndMonth[0],
                 month: dayAndMonth[1]
             };
-
-            return dayAndMonth;
         },
-        selectedWeekDay: function() {
+        selectedWeekDay() {
             return this.selectedDate.format("dddd");
         },
-        todayIsEqualSelectDate: function() {
-            return (
-                this.selectedDate.format("YYYYMMDD") ===
-                this.today.format("YYYYMMDD")
-            );
+        todayInCurrentMonthAndYear() {
+            return this.month === this.today.format("MMMM") && this.year === this.today.format("Y");
+        },
+        todayIsEqualSelectDate() {
+            return this.selectedDate.isSame(this.today, 'day');
         }
     },
     methods: {
-        addMonth: function() {
-            this.dateContext = this.nextMonth;
+
+        async fetchPatientId() {
+            try {
+                const response = await axios.get('/getPatientIdFromSession');
+                this.patientId = response.data;
+                console.log("Patient ID:", this.patientId);
+                this.fetchAppointments();
+            } catch (error) {
+                console.error("Error fetching patient ID:", error);
+            }
         },
-        subtractMonth: function() {
-            this.dateContext = this.previousMonth;
+
+        async fetchAppointments() {
+            console.log("Fetching appointments...");
+            const year = this.dateContext.year();
+            const month = this.dateContext.month() + 1; // month() is zero-indexed
+            console.log("Patient ID:", this.patientId); // Logging patientId before the request
+            try {
+                const response = await axios.get('/getAppointmentsByMonth', {
+                    params: {
+                        patientId: this.patientId, // Ensure patientId is passed as a parameter
+                        year: year,
+                        month: month
+                    }
+                });
+                console.log("Axios request URL:", response.config.url); // Logging Axios request URL
+                console.log("Axios request params:", response.config.params); // Logging Axios request parameters
+                this.appointmentsByPatientAndDate = response.data;
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
         },
-        setSelectedDate: function(moment) {
+               
+        
+        addMonth() {
+            this.dateContext = moment(this.dateContext).add(1, 'month');
+            this.fetchAppointments();
+        },
+        subtractMonth() {
+            this.dateContext = moment(this.dateContext).subtract(1, 'month');
+            this.fetchAppointments();
+        },
+        setSelectedDate(moment) {
             this.selectedDate = moment;
         },
-        goToday: function() {
+        goToday() {
             this.selectedDate = this.today;
             this.dateContext = this.today;
+            this.fetchAppointments();
         },
         formattingDay(day) {
             return ("0" + day).slice(-2);
         },
         getWeekDay(day) {
-            let index = day;
-            if (index > 7) {
-                index %= 7;
-            }
-            index = index === 0 ? 6 : index - 1;
-            return this.days[index];
+            let index = day % 7;
+            return this.days[index === 0 ? 6 : index - 1];
+        },
+        formatAppointmentTime(time) {
+            return moment(time, 'HH:mm').format('h:mm A');
+        },
+        getAppointmentsForDate(date) {
+            const formattedDate = date.format('YYYY-MM-DD');
+            return this.appointmentsByPatientAndDate[formattedDate] || [];
         }
     },
+    created() {
+        // Fetch the patient ID from the session
+        this.fetchPatientId();
+    },   
+          
     filters: {
-        capitalize: function(value) {
+        capitalize(value) {
             if (!value) return "";
             value = value.toString();
             return value.charAt(0).toUpperCase() + value.slice(1);
