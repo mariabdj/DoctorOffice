@@ -37,6 +37,12 @@ body {
   justify-content: space-between;
 }
 
+img {
+  width : 70px;
+  height: 65px;
+  margin-top: 10px;
+}
+
 .name,
 .blood {
   display: flex;
@@ -60,6 +66,8 @@ body {
 .NP, .GS {
   color: white;
   font-size: 20px;
+  font-weight: 520;
+  margin-top: 25px;
 }
 
 .consu {
