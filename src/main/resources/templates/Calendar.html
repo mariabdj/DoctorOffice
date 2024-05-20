@@ -74,7 +74,7 @@
                       <span class="month" v-show="date.additional.month">{{ date.additional.month }}</span>
                     </div>
                     <div class="appointments">
-                      <span v-for="appointment in getAppointmentsForDate(date.moment)" :key="appointment.numRen">
+                      <span class="ren" v-for="appointment in getAppointmentsForDate(date.moment)" :key="appointment.numRen">
                         {{ formatAppointmentTime(appointment.heure) }}
                       </span>
                     </div>

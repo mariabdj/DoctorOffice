@@ -59,19 +59,29 @@ public class RendezVousService {
 
     public Map<String, List<RendezVous>> getAppointmentsByPatientAndMonth(Long patientId, int year, int month) {
         Patient patient = patientService.getPatientById(patientId);
+    
+        // Set the start time to the beginning of the first day of the month
         Calendar startCal = Calendar.getInstance();
         startCal.set(year, month - 1, 1, 0, 0, 0);
+        startCal.set(Calendar.MILLISECOND, 0);
         Date startDate = startCal.getTime();
     
+        // Set the end time to the end of the last day of the month
         Calendar endCal = Calendar.getInstance();
-        endCal.set(year, month, 1, 0, 0, 0);
-        endCal.add(Calendar.DATE, -1);
+        endCal.set(year, month - 1, startCal.getActualMaximum(Calendar.DAY_OF_MONTH), 23, 59, 59);
+        endCal.set(Calendar.MILLISECOND, 999); // Make sure the end date is inclusive
         Date endDate = endCal.getTime();
     
+        System.out.println("Start Date: " + startDate);
+        System.out.println("End Date: " + endDate);
+    
         List<RendezVous> appointments = rendezVousRepository.findByPatientAndDateRenBetween(patient, startDate, endDate);
+    
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     
         return appointments.stream().collect(Collectors.groupingBy(appt -> dateFormat.format(appt.getDateRen())));
     }
+    
+    
     
 }

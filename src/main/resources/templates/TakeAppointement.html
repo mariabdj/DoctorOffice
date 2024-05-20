@@ -9,11 +9,18 @@
 <body>
 <div id="affiche">
     <div class="registration-form">
-        <header>
-            <h1>New Appointment</h1>
-            <p>Fill in all information</p>
-        </header>
-        <form action="/take" method="post">
+        <header class="registration-form-header">
+            <div class="header-content">
+                <div class="text-content">
+                    <h1>New Appointment</h1>
+                    <p>Fill in all information</p>
+                </div>
+                <div class="image-content">
+                    <img src="../static/img/icons8-time-card-50.png" alt="">
+                </div>
+            </div>
+        </header>        
+        <form id="appointmentForm" action="/take" method="post">
             <div class="input-section email-section">
                 <input class="email" type="date" placeholder="ENTER A DATE" autocomplete="off"  name="date">
                 <div class="animated-button"><span class="icon-paper-plane"><i class="fa fa-envelope-o"></i></span><span class="next-button email"><i class="fa fa-arrow-up"></i></span></div>
@@ -35,5 +42,34 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../static/TakeAppointement.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#appointmentForm').submit(function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Serialize form data
+        var formData = $(this).serialize();
+
+        // Send form data using AJAX
+        $.ajax({
+            type: 'POST',
+            url: '/take',
+            data: formData,
+            success: function(response) {
+                // Handle success response if needed
+                console.log('Appointment taken successfully!');
+                // You can display a success message or perform any other actions here
+            },
+            error: function(xhr, status, error) {
+                // Handle error response if needed
+                console.error('Failed to take appointment:', error);
+                // You can display an error message or perform any other actions here
+            }
+        });
+    });
+});
+
+</script>
 </body>
 </html>

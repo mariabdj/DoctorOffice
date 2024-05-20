@@ -22,14 +22,25 @@ body {
   background: transparent;
   margin-top: 100px;
 }
- .registration-form header {
+.registration-form-header {
   position: relative;
   z-index: 4;
   background: white;
   padding: 20px 40px;
   border-radius: 15px 15px 0 0;
 }
-.registration-form header h1 {
+
+.registration-form-header .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.registration-form-header .header-content .text-content {
+  flex: 1;
+}
+
+.registration-form-header h1 {
   font-weight: 900;
   letter-spacing: 1.5px;
   color: #333;
@@ -37,13 +48,19 @@ body {
   text-transform: uppercase;
   margin: 0;
 }
-.registration-form header p {
+
+.registration-form-header p {
   word-spacing: 0px;
   color: rgb(159, 172, 182);
   font-size: 17px;
   margin: 0;
   margin-top: 5px;
 }
+
+.registration-form-header .header-content .image-content img {
+  width: 60px;
+}
+
 .registration-form form {
   position: relative;
 }
