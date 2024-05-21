@@ -32,8 +32,11 @@
             <div class="input-section repeat-password-section folded">
                 <input class="repeat-password" type="text" placeholder="CHOOSE YOUR DOCTOR" name="doctor">
                 <!-- Note: Changed class name to 'submitButton' for easier identification -->
-                <div type="submit" th:onclick="'document.querySelector(\'form\').submit();'" class="animated-button"><span class="icon-repeat-lock"><i class="fa fa-lock"></i></span><span type="submit" class="next-button repeat-password submitButton"><i type="submit" class="fa fa-paper-plane"></i></span></div>
-            </div>
+                <div type="submit" id="submitButton" class="animated-button">
+                    <span class="icon-repeat-lock"><i class="fa fa-lock"></i></span>
+                    <span class="next-button repeat-password"><i class="fa fa-paper-plane"></i></span>
+                </div>
+                            </div>
             <div class="success">
                 <p>APPOINTMENT TAKEN</p>
             </div>
@@ -43,13 +46,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../static/TakeAppointement.js"></script>
 <script>
-    $(document).ready(function() {
-    $('#appointmentForm').submit(function(event) {
-        // Prevent the default form submission behavior
-        event.preventDefault();
+   $(document).ready(function() {
+    $('#submitButton').click(function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-        // Serialize form data
-        var formData = $(this).serialize();
+        // Get form data
+        var formData = $('#appointmentForm').serialize();
 
         // Send form data using AJAX
         $.ajax({
@@ -57,9 +59,8 @@
             url: '/take',
             data: formData,
             success: function(response) {
-                // Handle success response if needed
-                console.log('Appointment taken successfully!');
-                // You can display a success message or perform any other actions here
+                // Display success message
+                $('.success').fadeIn();
             },
             error: function(xhr, status, error) {
                 // Handle error response if needed
