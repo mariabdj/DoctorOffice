@@ -19,6 +19,12 @@ body {
   background-attachment: fixed;
 }
 
+.mer{
+  color: #7895CB;
+  font-weight: 700;
+  margin-left: 30px;
+}
+
 .wrapper-form {
   display: flex;
   justify-content: center;

@@ -43,6 +43,17 @@ public class Consultation {
         this.patient = patient;
     }
 
+    
+
+    public Consultation(String diagnostic, Date dateCons, String medicament, Patient patient) {
+        this.diagnostic = diagnostic;
+        this.dateCons = dateCons;
+        this.medicament = medicament;
+        this.patient = patient;
+    }
+
+
+
     public Consultation() {
     }
 

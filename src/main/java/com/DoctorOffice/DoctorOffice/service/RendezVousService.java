@@ -1,6 +1,8 @@
 package com.DoctorOffice.DoctorOffice.service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -82,6 +84,15 @@ public class RendezVousService {
         return appointments.stream().collect(Collectors.groupingBy(appt -> dateFormat.format(appt.getDateRen())));
     }
     
-    
+
+    public List<RendezVous> getAppointmentsByMonth(int year, int month) {
+    LocalDate startOfMonth = LocalDate.of(year, month, 1);
+    LocalDate endOfMonth = startOfMonth.withDayOfMonth(startOfMonth.lengthOfMonth());
+    return rendezVousRepository.findByDateRenBetween(
+        Date.from(startOfMonth.atStartOfDay(ZoneId.systemDefault()).toInstant()), // Convert LocalDate to Date
+        Date.from(endOfMonth.atStartOfDay(ZoneId.systemDefault()).toInstant())
+    );
+}
+
     
 }

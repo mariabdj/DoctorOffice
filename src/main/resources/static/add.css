@@ -1,0 +1,121 @@
+.service-content-wrapper {
+  position: relative;
+}
+
+.service-content {
+  background: conic-gradient(
+      #7895CB,
+      #C5DFF8,
+      #c2dedcad,
+      #f7f1fa,
+      #7895CB,
+      #7895CB
+  );
+  backdrop-filter: blur(20px); 
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.service-content #btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.service-content input,
+.service-content select {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.service-content .button > button {
+  margin: 0;
+  padding: 17px 35px;
+  outline: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #fff;
+  border: 1px solid #7895CB;
+  border-radius: 10px;
+  color: #C5DFF8;
+  font-weight: 400;
+  font-family: inherit;
+  z-index: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.service-content .button > button span {
+  color: #164ca7;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.7px;
+}
+
+.service-content .button > button:hover {
+  animation: rotate624 0.7s ease-in-out both;
+}
+
+.service-content .button > button:hover span {
+  animation: storm1261 0.7s ease-in-out both;
+  animation-delay: 0.06s;
+}
+
+@keyframes rotate624 {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: rotate(3deg) translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: rotate(-3deg) translate3d(0, 0, 0);
+  }
+
+  75% {
+    transform: rotate(1deg) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes storm1261 {
+  0% {
+    transform: translate3d(0, 0, 0) translateZ(0);
+  }
+
+  25% {
+    transform: translate3d(4px, 0, 0) translateZ(0);
+  }
+
+  50% {
+    transform: translate3d(-3px, 0, 0) translateZ(0);
+  }
+
+  75% {
+    transform: translate3d(2px, 0, 0) translateZ(0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) translateZ(0);
+  }
+}
+
+.service-content .btn-shine {
+  border: 1px solid;
+  overflow: hidden;
+  position: relative;
+}
+
+.service-content .btn-shine span {
+  z-index: 20;
+}

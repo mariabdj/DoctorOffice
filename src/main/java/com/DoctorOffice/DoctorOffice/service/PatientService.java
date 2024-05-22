@@ -1,5 +1,7 @@
 package com.DoctorOffice.DoctorOffice.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,21 @@ public class PatientService {
 
     public Patient getPatientById(Long id) {
         return patientRepository.findById(id).orElse(null);
+    }
+
+    public List<Patient> getAllPatients() {
+        // Fetch all patients from the repository
+        List<Patient> patients = patientRepository.findAll();
+        System.out.println("Number of patients fetched: " + patients.size());
+        return patients;
+    }    
+
+    public List<Patient> searchPatientsByName(String name) {
+        return patientRepository.findByNomContainingIgnoreCase(name);
+    }
+
+    public void savePatient(Patient patient) {
+        patientRepository.save(patient);
     }
 
 

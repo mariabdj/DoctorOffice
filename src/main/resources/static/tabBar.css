@@ -18,7 +18,7 @@
   background-attachment: fixed;
   }
 
-  .sc-bottom-bar{
+  .tab-bar-container .sc-bottom-bar{
     display:flex;
     margin-top: 1000px;
     padding: 16px 36px;
@@ -39,7 +39,7 @@
     transition: cubic-bezier(0.57, 0.23, 0.08, 0.96) .45s;
   }
   
-  .sc-nav-indicator{
+  .tab-bar-container .sc-nav-indicator{
     position:absolute; 
   
     width: 56px;
@@ -53,12 +53,12 @@
     border-radius:50%;
     transition: cubic-bezier(0.45, 0.73, 0, 0.59) .3s;
   }
-  .sc-menu-item{
+  .tab-bar-container  .sc-menu-item{
     color:var(--fore-color);
     transition:ease-in-out .5s;
     cursor: pointer;
   }
-  .sc-current{
+  .tab-bar-container .sc-current{
     position:relative;
     
     color:#ffffff;

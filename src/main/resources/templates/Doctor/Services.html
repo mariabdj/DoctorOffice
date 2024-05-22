@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/add.css">
+</head>
+<body>
+
+    <div class="service-content-wrapper">
+        <div class="service-content">
+            <div id="btn" class="button">
+                <button id="addPat" class="btn-shine">
+                    <span>Add Patient</span>
+                </button>
+                <button id="addCons" class="btn-shine">
+                    <span>Add Consultation</span>
+                </button>
+                <button id="addRen" class="btn-shine">
+                    <span>Add Appointement</span>
+                </button>
+               </div>
+               
+              <!-- Display Success and Error Messages -->
+            <div th:if="${successMessage}" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Success!</strong>
+                <span class="block sm:inline" th:text="${successMessage}"></span>
+            </div>
+            <div th:if="${errorMessage}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Error!</strong>
+                <span class="block sm:inline" th:text="${errorMessage}"></span>
+            </div>
+
+            <div id="ajoutPat" class="relative py-3 sm:max-w-xl sm:mx-auto">
+                <div class="max-w-md mx-auto">
+                    <form action="/addPat" method="post">
+                        <!-- First Name and Last Name -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="font-semibold text-sm text-gray-600 pb-1 block" for="firstname">First Name</label>
+                                <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="text" id="firstname" name="nom" th:value="${nom}" />
+                            </div>
+                            <div>
+                                <label class="font-semibold text-sm text-gray-600 pb-1 block" for="lastname">Last Name</label>
+                                <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="text" id="lastname" name="prenom" th:value="${prenom}" />
+                            </div>
+                        </div>
+                        <!-- Email and Address -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="font-semibold text-sm text-gray-600 pb-1 block" for="email">Email</label>
+                                <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="email" id="email" name="email" th:value="${email}" />
+                            </div>
+                            <div>
+                                <label class="font-semibold text-sm text-gray-600 pb-1 block" for="address">Address</label>
+                                <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="text" id="address" name="adresse" th:value="${adresse}" />
+                            </div>
+                        </div>
+                        <!-- Phone Number and Illnesses -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="font-semibold text-sm text-gray-600 pb-1 block" for="phone">Phone Number</label>
+                                <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="tel" id="phone" name="numtel" th:value="${numtel}" />
+                            </div>
+                            <div>
+                                <label class="font-semibold text-sm text-gray-600 pb-1 block" for="illnesses">Illnesses</label>
+                                <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="text" id="illnesses" name="maladies" th:value="${maladies}" />
+                            </div>
+                        </div>
+                        <!-- Date of Birth and Gender -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <!-- Date of Birth -->
+                            <div>
+                                <label class="font-semibold text-sm text-gray-600 pb-1 block" for="dob">Date of Birth</label>
+                                <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="date" id="dob" name="birthdate" pattern="\d{4}-\d{2}-\d{2}" />
+                            </div>
+                            <!-- Gender -->
+                            <div>
+                                <label class="font-semibold text-sm text-gray-600 pb-1 block" for="gender">Gender</label>
+                                <select class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" id="gender" name="gender" th:value="${gender}">
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Sign up Button -->
+                        <div class="mt-5">
+                            <button class="py-2 px-4 bg-blue-400 hover:bg-blue-500 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg" type="submit" name="action" value="addPat">
+                                Add Patient
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            
+            
+                    <div id="ajoutConsultation" class="relative py-3 sm:max-w-xl sm:mx-auto">
+                            <div class="max-w-md mx-auto">
+                                    <form action="/addCons" method="post">
+                                            <!-- First Name and Last Name -->
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                                <div>
+                                                    <label class="font-semibold text-sm text-gray-600 pb-1 block" for="diagnostic">Diagnostic</label>
+                                                    <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="text" id="firstname" name="diagnostic" th:value="${diagnostic}" />
+                                                </div>
+                                                <div>
+                                                    <label class="font-semibold text-sm text-gray-600 pb-1 block" for="medicament">Medicament</label>
+                                                    <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="text" id="lastname" name="medicament" th:value="${medicament}" />
+                                                </div>
+                                            </div>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                                <div>
+                                                    <label class="font-semibold text-sm text-gray-600 pb-1 block" for="matPat">ID Patient</label>
+                                                    <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" 
+                                                    type="text" 
+                                                    id="illnesses" 
+                                                    name="matPat" 
+                                                    th:value="${matPat}" />
+                                                                                         </div>
+                                                <div>
+                                                    <label class="font-semibold text-sm text-gray-600 pb-1 block" for="dateCons">Consultation Date</label>
+                                                    <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="date" id="dob" name="dateCons"  th:value="${dateCons}"/>
+                                                </div>
+                                            </div>
+                                        <div class="mt-5">
+                                            <button class="py-2 px-4 bg-blue-400 hover:bg-blue-500 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg" type="submit" name="action" value="addCons">
+                                                Add Consultation
+                                            </button>
+                                        </div> 
+                                    </form>                    
+                            </div>
+                        </div>
+    
+                        <div id="ajoutAppointement" class="relative py-3 sm:max-w-xl sm:mx-auto">
+                            <div class="max-w-md mx-auto">
+                                    <form action="/addApp" method="post">
+                                            <!-- First Name and Last Name -->
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            
+                                                <div>
+                                                    <label class="font-semibold text-sm text-gray-600 pb-1 block" for="heure">Hour</label>
+                                                    <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="time" id="lastname" name="heure" th:value="${heure}" />
+                                                </div>
+                                                <div>
+                                                    <label class="font-semibold text-sm text-gray-600 pb-1 block" for="patient.matPat">ID Patient</label>
+                                                    <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" 
+                                                    type="text" 
+                                                    id="illnesses" 
+                                                    name="matPat" 
+                                                    th:value="${matPat}"/>
+                                                 </div>
+                                            </div>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            
+                                                <div>
+                                                    <label class="font-semibold text-sm text-gray-600 pb-1 block" for="dateRen">Appointement Date</label>
+                                                    <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="date" id="dob" name="dateRen"  th:value="${dateRen}"/>
+                                                </div>
+                                                 <!-- Medecin -->
+                            <div>
+                                <label class="font-semibold text-sm text-gray-600 pb-1 block" for="medecin">Doctor</label>
+                                <select class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" id="gender" name="medecin" th:value="${medecin}">
+                                    <option value="P">Principale Doctor</option>
+                                    <option value="R">replacement Doctor</option>
+                                </select>
+                            </div>
+                                            </div>
+                                        <div class="mt-5">
+                                            <button class="py-2 px-4 bg-blue-400 hover:bg-blue-500 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg" type="submit" name="action" value="addApp">
+                                                Add Appointement
+                                            </button>
+                                        </div> 
+                                    </form>                    
+                            </div>
+                        </div>
+           </div>
+    </div>
+       
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+            <script>
+                $(document).ready(function() {
+                    // Hide all forms initially except the first one
+                    $('#ajoutPat').show();
+                    $('#ajoutConsultation').hide();
+                    $('#ajoutAppointement').hide();
+            
+                    // Add Patient button click event
+                    $('#addPat').click(function() {
+                        $('#ajoutPat').show();
+                        $('#ajoutConsultation').hide();
+                        $('#ajoutAppointement').hide();
+                    });
+            
+                    // Add Consultation button click event
+                    $('#addCons').click(function() {
+                        $('#ajoutPat').hide();
+                        $('#ajoutConsultation').show();
+                        $('#ajoutAppointement').hide();
+                    });
+            
+                    // Add Appointment button click event
+                    $('#addRen').click(function() {
+                        $('#ajoutPat').hide();
+                        $('#ajoutConsultation').hide();
+                        $('#ajoutAppointement').show();
+                    });
+            
+                                   });
+            </script>
+            
+            
+                
+
+</body>
+</html>
