@@ -34,6 +34,8 @@ Before you begin, ensure you have the following installed:
 - Oracle Database
 - Git
    ```
+## Demonstrative Videos
+[Videos](https://drive.google.com/drive/folders/1U7nd1kmjDceQrGdRWjVhjHM1exnXiVjS?usp=sharing)
 
 ## Installation
 
