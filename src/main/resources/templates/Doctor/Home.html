@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" CONTENT="Author: A.N. Ajib Roziq">
+    <title>Doctor</title>
+    <link rel="stylesheet" href="../../static/Docteur.css">
+</head>
+<body>
+    <div class="wrapper-form">      
+        <div class="card-glass">
+            <div class="card-glass-header">
+                <div class="glass-header-text">Hello Doctor!</div>
+            </div>
+            <form action="/done" method="post">
+                <div class="glass-container">
+                    <div class="form-glass-group">
+                        <input th:value="${username}" type="text" class="form-glass-control" placeholder="Username" name="username">
+                    </div>
+                    <div class="form-glass-group">
+                        <input th:value="${password}"  type="password" class="form-glass-control" placeholder="Password" id="password" name="password">
+                        <div class="show-hide-toggle" onclick="showHide()">Show</div>
+                    </div>
+                    <div class="error">
+                        <p class="mer" th:text="${errorMess}"></p>
+                    </div>
+                    <button type="submit" class="btn btn btn-primary">Start</button>
+                    
+                </div>
+            </form>
+        </div>
+    <script src="../../static/Docteur.js"></script>
+</body>
+</html>

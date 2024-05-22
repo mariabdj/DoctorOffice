@@ -34,7 +34,6 @@ public class MedicaleFileController {
 public String redirectMedicaleFile(HttpSession session, Model model) {
     System.out.println("WE ARRIVED 1");
     SessionCompte account = (SessionCompte) session.getAttribute("account");
-    System.out.println("012Username :" +account.getUtilisateur()+" Mot de passe : " +account.getMotDePasse());
     Patient patient;
 
     // Check if the user is authenticated through session or directly accessing patient data

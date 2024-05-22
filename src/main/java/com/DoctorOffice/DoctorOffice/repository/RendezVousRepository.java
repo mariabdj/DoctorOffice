@@ -14,4 +14,5 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
     List<RendezVous> findByDateRen(Date dateRen);
      List<RendezVous> findByPatient(Patient patient);
      List<RendezVous> findByPatientAndDateRenBetween(Patient patient, Date startDate, Date endDate);
+     List<RendezVous> findByDateRenBetween(Date startDate, Date endDate);
 }

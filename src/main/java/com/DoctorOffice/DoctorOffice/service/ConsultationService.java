@@ -22,4 +22,8 @@ public class ConsultationService {
     public List<Consultation> getConsultationsByPatient(Patient patient) {
         return consultationRepository.findByPatient(patient);
     }
+
+    public void saveConsultation(Consultation consultation) {
+        consultationRepository.save(consultation);
+    }
 }
