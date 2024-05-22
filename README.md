@@ -33,14 +33,14 @@ Before you begin, ensure you have the following installed:
 - Maven
 - Oracle Database
 - Git
+   ```
 
-### Installation
+## Installation
 
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/mariabdj/DoctorOffice.git
    cd DoctorOffice
-   ```
 
 2. **Configure the database:**
    Update the `application.properties` file with your Oracle database credentials.
